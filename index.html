@@ -1,0 +1,252 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+<title>MA Collateral Consequences</title>
+	<meta charset="utf-8"/>
+	
+	<!-- mobile client meta data -->
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<link rel="apple-touch-icon-precomposed" href="style/images/icon.png"/> 
+	<link rel="apple-touch-startup-image" href="style/images/splash.png" />   
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
+	
+	<!-- local javascript library and style sheets -->
+	<script src="js_bin/script_lib_1.js"></script>
+	<link rel="stylesheet" href="style/custom.min.css" />
+
+	<!-- jQuery Mobile scripts and style Sheets -->
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+	<!-- jQuery settings -->
+	
+	<script type="text/javascript">
+		var prefs_oe = 1;
+		var user_id = 0;
+		var priorities = "";
+		
+		if($(window).width() <= 650) {
+			// set default transition 
+			$.mobile.defaultPageTransition = 'slide';
+    	} else {
+			// set default transition 
+			$.mobile.defaultPageTransition = 'none';
+    	}
+		
+		$(document).ready(function() {
+			// avoid caching ajax pages in jquery
+			$.ajaxSetup({ cache: true });			
+		});
+				
+	</script>	
+</head>
+<body id="body"> 
+
+<div data-role="page" id="home">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<h1></h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	<div id="content" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+		<center><b><font size=+2>Collateral Consequences</font></b></center>
+		<p>
+		[TK. Explanation of app, including: (1) why we ask for demographic info. and user priority rankings (i.e., to improve the relevance of consequence ordering); (2) the fact that users can include as little or as much info. as they like; and (3) that our charge list is limited to MA crimes.]
+		</p>	
+		<a href="#" onClick="$.mobile.changePage('#you');" data-role="button">Continue</a>
+	</div>
+</div>
+
+<div data-role="page" id="credits">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#home" data-rel="back" data-iconpos="notext" data-theme="b" data-icon="delete" data-transition="slideup" ></a>
+		<h1>About</h1>
+	</div><!-- /header -->
+	<div id="content" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+		<font size=+2><b>What is this?</b></font>
+		<p>
+		<b>This is NOT legal advise. <em>Consult an attorney if you need legal advice.</em></b>
+		</p>
+		<p>
+		This site uses data from the <a href="http://www.abacollateralconsequences.org/">National Inventory of Collateral Consequences</a>, data from the <a href="http://www.mass.gov/courts/court-info/trial-court/sent-commission/">MA Sentencing Commission</a>, and an analysis of aggregate vistor interactions to provide a user-tailored ordering of collateral consequences triggered by MA criminal convictions. For more information, visit <a href="https://github.com/lawiscode/legalcalculators/wiki">our wiki</a>.
+		</p>
+		<font size=+2><b>Credits</b></font>
+		<p>
+		This site was built as part of the 2015 class <a href="http://courses.csail.mit.edu/iap/lawiscode/">Law is Code</a> by <a href="http://www.davidcolarusso.com/">David Colarusso</a> and Jacob Rosen. 
+		</p>	
+	</div>
+</div>
+
+<div data-role="page" id="you">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#home" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>Context?</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	<form name="FORM" method="POST" onsubmit="logcheck();return false;" data-transition="none">
+	<div id="content" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+	
+<div data-role="fieldcontain" style="margin-top:-5px;"> 
+	<input type=hidden name="user_id" id="user_id" value="0"/>
+    <fieldset data-role="controlgroup">	
+	    <legend><b>Charge?</b></legend>
+		<input type="text" name="charge" id="charge" value="" placeholder="e.g., A&amp;B" data-theme="a"/>
+	    <em>Start typing then choose from auto complete.</em>
+    </fieldset>
+</div>
+		 
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+    	<legend><b>Citizenship Status (US)?</b></legend>
+         	<input type="radio" name="citizenship" id="citizenship-1" value="1" />
+         	<label for="citizenship-1">citizen</label>
+         	<input type="radio" name="citizenship" id="citizenship-2" value="0"  />
+         	<label for="citizenship-2">non-citizen</label>
+    </fieldset>
+</div>
+
+<div data-role="fieldcontain">
+    <fieldset data-role="controlgroup" data-type="horizontal">
+    	<legend><b>Gender Identity?</b></legend>
+         	<input type="radio" name="gender" id="gender-1" value="m" />
+         	<label for="gender-1">man</label>
+         	<input type="radio" name="gender" id="gender-2" value="w"  />
+         	<label for="gender-2">woman</label>
+         	<input type="radio" name="gender" id="gender-3" value="t"  />
+         	<label for="gender-3">trans*</label>
+    </fieldset>
+</div>		
+	<p>	
+	<a href="#" onClick="loadme('prefs_prompt,prefs,results,categories');" data-role="button">Next</a>
+	</p>
+	</form>
+	</div>
+</div>
+
+<div data-role="page" id="prefs_prompt">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#you" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>Customize?</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	<div id="content_prefs_promt" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+		Loading...
+	</div>
+</div>
+
+<div data-role="page" id="prefs_odd">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#prefs_prompt" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>Priorities?</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	<div id="content_prefs_odd" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+		<center>loading...</center>
+	</div>
+	<div data-role="footer" data-id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#results"><font size=+1>Show Results</font><p style="white-space:normal">Tap anytime. However, the more completed match-ups, the better your results.</p></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+<div data-role="page" id="prefs_even">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#prefs_prompt" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>Priorities?</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	<div id="content_prefs_even" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
+		<center>loading...</center>
+	</div>
+	<div data-role="footer" data-id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<div data-role="navbar">
+			<ul>
+				<li><a href="#results"><font size=+1>Show Results</font><p style="white-space:normal">Tap anytime. However, the more completed match-ups, the better your results.</p></a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+
+
+
+<div data-role="page" id="results">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#prefs_prompt" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1 id="n_results">[n] Results</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	
+	<div id="content_results" data-role="content" style="text-align:left;margin:0;padding-top:0;" >	
+		Loading...
+ 	</div><!-- /content -->
+ 	<div data-role="footer" data-id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+ 	<div data-role="navbar">
+	<ul>
+		<li><a href="#" class="ui-btn-active ui-state-persist">All Items</a></li>
+		<li><a href="#categories">Categories</a></li>
+	</ul>
+</div><!-- /navbar -->
+</div>
+</div>
+
+<div data-role="page" id="categories">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#prefs_prompt" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1 id="n_results_too">[n] Results</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	
+	<div id="content_categories" data-role="content" style="text-align:left;margin:0 auto 0 auto;" >	
+		Loading...
+ 	</div><!-- /content -->
+ 	 	<div data-role="footer" data-id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+ 	<div data-role="navbar">
+	<ul>
+		<li><a href="#results" data-direction="reverse">All Items</a></li>
+		<li><a href="#"class="ui-btn-active ui-state-persist" >Categories</a></li>
+	</ul>
+</div><!-- /navbar -->
+</div>
+</div>
+
+<div data-role="page" id="cat_results">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#categories" data-iconpos="notext" data-theme="b" data-icon="arrow-l" data-direction="reverse"></a>
+		<h1>[Category]</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	
+	<div id="content_cat_results" data-role="content" style="text-align:left;margin:0;padding-top:0;" >	
+		Loading...
+ 	</div><!-- /content -->
+ 	 	 	<div data-role="footer" data-id="myfooter" data-role="footer" data-position="fixed" data-tap-toggle="false" data-theme="b">
+ 	<div data-role="navbar">
+	<ul>
+		<li><a href="#results" data-direction="reverse">All Items</a></li>
+		<li><a href="#"class="ui-btn-active ui-state-persist" >Categories</a></li>
+	</ul>
+</div><!-- /navbar -->
+</div>
+</div>
+
+
+<div data-role="page" id="result">
+<div data-role="header" data-id="myheader" data-position="fixed" data-tap-toggle="false" data-theme="b">
+		<a href="#" data-rel="back" data-iconpos="notext" data-theme="b" data-icon="arrow-l"></a>
+		<h1>Consequence</h1>
+		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
+	</div><!-- /header -->
+	
+	<div id="content_result" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >	
+
+ads
+
+
+ 	</div><!-- /content -->
+</div>
+
+</body>
+</html>
