@@ -1,0 +1,3 @@
+# MA Collateral Consequence Explorer
+
+For an overview of this project, check out our [wiki page](https://github.com/lawiscode/legalcalculators/wiki). This project was suggested as a civic-hacking project on the MA Defender's hackable wiki under [calculators](https://github.com/MA-Defenders/hackable/wiki#calculators), and undertaken as part of the 2015 winter-session class, [Law is Code](http://courses.csail.mit.edu/iap/lawiscode/).

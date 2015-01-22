@@ -10,22 +10,16 @@
 	<link rel="apple-touch-icon-precomposed" href="style/images/icon.png"/> 
 	<link rel="apple-touch-startup-image" href="style/images/splash.png" />   
 	<meta name="apple-mobile-web-app-status-bar-style" content="black" />  
-
-   	<link href="assets/vendor/jquery-ui-1.11.0.custom/jquery-ui.css" rel="stylesheet">
-   	<script src="assets/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-
-	<!-- local javascript library and style sheets -->
-	<script src="assets/js/script_lib.js"></script>
-	<link rel="stylesheet" href="style/custom.min.css" />
 	
+	<!-- local javascript library and style sheets -->
+	<script src="js_bin/script_lib_1.js"></script>
+	<link rel="stylesheet" href="style/custom.min.css" />
+
 	<!-- jQuery Mobile scripts and style Sheets -->
 	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-	
 	<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 	<!-- jQuery settings -->
-
-
 	
 	<script type="text/javascript">
 		var prefs_oe = 1;
@@ -45,9 +39,7 @@
 			$.ajaxSetup({ cache: true });			
 		});
 				
-				
 	</script>	
-
 </head>
 <body id="body"> 
 
@@ -91,19 +83,14 @@
 		<h1>Context?</h1>
 		<a href="#credits" data-iconpos="notext" data-theme="b" data-icon="info" data-transition="slideup" class="ui-btn-right"></a>
 	</div><!-- /header -->
-	<form name="FORM" action="javascript:void(0);">
+	<form name="FORM" method="POST" onsubmit="logcheck();return false;" data-transition="none">
 	<div id="content" data-role="content" style="text-align:left;max-width:650px;margin:0 auto 0 auto;" >
 	
 <div data-role="fieldcontain" style="margin-top:-5px;"> 
 	<input type=hidden name="user_id" id="user_id" value="0"/>
     <fieldset data-role="controlgroup">	
 	    <legend><b>Charge?</b></legend>
-		
-		<input id="current" class="crimes" name="charge" placeholder="e.g., A&B c. 265 s. 13A(a) ">
-		<!--AUTOCOMPLETE -->
-		<div id="current_place">
-		</div>
-		
+		<input type="text" name="charge" id="charge" value="" placeholder="e.g., A&amp;B" data-theme="a"/>
 	    <em>Start typing then choose from auto complete.</em>
     </fieldset>
 </div>
@@ -262,7 +249,4 @@ ads
 </div>
 
 </body>
-        <script src="assets/js/vendor/underscore-min.js"></script>
-        <script src="assets/vendor/jquery-ui-1.11.0.custom/jquery-ui.min.js"></script>
-        <script src="assets/js/main.js"></script>
 </html>
