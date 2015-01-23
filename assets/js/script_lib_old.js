@@ -12,8 +12,7 @@ xhttp.open("GET",dname,false);
 xhttp.send("");
 return xhttp.responseXML;
 }
-
-
+ 
 function loadme (myname,citation) {
 
 	$.mobile.loading('show');
@@ -55,57 +54,6 @@ function loadme (myname,citation) {
 				$.mobile.loading('hide');
 				$.mobile.changePage('#prefs_prompt');
 			}
-			
-			
-			xsl=loadXMLDoc("xsl/results.xsl");
-			// code for IE
-			if (window.ActiveXObject)
-				{
-				ex=xml.transformNode(xsl);
-				$('#content_results').html(ex).trigger("create");
-				}
-			// code for Mozilla, Firefox, Opera, etc.
-			else if (document.implementation && document.implementation.createDocument)
-				{
-				xsltProcessor=new XSLTProcessor();
-				xsltProcessor.importStylesheet(xsl);
-				resultDocument = xsltProcessor.transformToFragment(xml,document);
-				$('#content_results').html(resultDocument).trigger("create");
-				}		
-
-			
-			xsl=loadXMLDoc("xsl/categories.xsl");
-			// code for IE
-			if (window.ActiveXObject)
-				{
-				ex=xml.transformNode(xsl);
-				$('#content_categories').html(ex).trigger("create");
-				}
-			// code for Mozilla, Firefox, Opera, etc.
-			else if (document.implementation && document.implementation.createDocument)
-				{
-				xsltProcessor=new XSLTProcessor();
-				xsltProcessor.importStylesheet(xsl);
-				resultDocument = xsltProcessor.transformToFragment(xml,document);
-				$('#content_categories').html(resultDocument).trigger("create");
-				}		
-				
-			xsl=loadXMLDoc("xsl/categories_results.xsl");
-			// code for IE
-			if (window.ActiveXObject)
-				{
-				ex=xml.transformNode(xsl);
-				$('#content_cat_results').html(ex).trigger("create");
-				}
-			// code for Mozilla, Firefox, Opera, etc.
-			else if (document.implementation && document.implementation.createDocument)
-				{
-				xsltProcessor=new XSLTProcessor();
-				xsltProcessor.importStylesheet(xsl);
-				resultDocument = xsltProcessor.transformToFragment(xml,document);
-				$('#content_cat_results').html(resultDocument).trigger("create");
-				}	
-			
   		} else if (myStringArray[i] == 'prefs') {
 			console.log('load prefereces');
 			var whereto = "";
@@ -142,18 +90,41 @@ function loadme (myname,citation) {
   		} else if (myStringArray[i] == 'results') {
 			console.log('load results');
 			xml=loadXMLDoc("python/results.py?user_id="+user_id);
-
+			xsl=loadXMLDoc("xsl/results.xsl");
+			// code for IE
+			if (window.ActiveXObject)
+				{
+				ex=xml.transformNode(xsl);
+				$('#content_results').html(ex).trigger("create");
+				}
+			// code for Mozilla, Firefox, Opera, etc.
+			else if (document.implementation && document.implementation.createDocument)
+				{
+				xsltProcessor=new XSLTProcessor();
+				xsltProcessor.importStylesheet(xsl);
+				resultDocument = xsltProcessor.transformToFragment(xml,document);
+				$('#content_results').html(resultDocument).trigger("create");
+				}		
   		} else if (myStringArray[i] == 'categories') {
 			console.log('load result categories');
 			xml=loadXMLDoc("python/categories.py?user_id="+user_id);
-
-		} else if (myStringArray[i] == 'category') {
-
-			document.getElementById('cat_name').innerHTML = citation;
-			//xml=loadXMLDoc("python/new_user.py");
-			xml=loadXMLDoc("python/new_user.py?"+$( "FORM" ).serialize());
-
-			xsl=loadXMLDoc("xsl/category.xsl");
+			xsl=loadXMLDoc("xsl/categories.xsl");
+			// code for IE
+			if (window.ActiveXObject)
+				{
+				ex=xml.transformNode(xsl);
+				$('#content_categories').html(ex).trigger("create");
+				}
+			// code for Mozilla, Firefox, Opera, etc.
+			else if (document.implementation && document.implementation.createDocument)
+				{
+				xsltProcessor=new XSLTProcessor();
+				xsltProcessor.importStylesheet(xsl);
+				resultDocument = xsltProcessor.transformToFragment(xml,document);
+				$('#content_categories').html(resultDocument).trigger("create");
+				}		
+				
+			xsl=loadXMLDoc("xsl/categories_results.xsl");
 			// code for IE
 			if (window.ActiveXObject)
 				{
@@ -164,19 +135,10 @@ function loadme (myname,citation) {
 			else if (document.implementation && document.implementation.createDocument)
 				{
 				xsltProcessor=new XSLTProcessor();
-				
-				xsltProcessor.getParameter(null, "category");
-				xsltProcessor.setParameter(null, "category", citation);
-				
 				xsltProcessor.importStylesheet(xsl);
 				resultDocument = xsltProcessor.transformToFragment(xml,document);
 				$('#content_cat_results').html(resultDocument).trigger("create");
-				}		
-			if (i == 0) {
-				$.mobile.loading('hide');
-				$.mobile.changePage('#cat_results'); 
-			}
-
+				}	
 		} else if (myStringArray[i] == 'result') {
 			console.log('load a single result');
 			xml=loadXMLDoc("python/result.py?user_id="+user_id+"&citation_id="+citation);	
